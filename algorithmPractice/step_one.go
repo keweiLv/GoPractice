@@ -45,3 +45,42 @@ func rotateString(A string, B string) bool {
 	}
 	return false
 }
+
+// 最后一个单词长度
+func lengthOfLastWord(s string) (ans int) {
+	index := len(s) - 1
+	for s[index] == ' ' {
+		index--
+	}
+	for index >= 0 && s[index] != ' ' {
+		ans++
+		index--
+	}
+	return
+}
+
+// 不同的二叉搜索树
+func numTrees(n int) int {
+	G := make([]int, n+1)
+	G[0], G[1] = 1, 1
+	for i := 2; i <= n; i++ {
+		for j := 1; j <= i; j++ {
+			G[i] += G[j-1] * G[i-j]
+		}
+	}
+	return G[n]
+}
+
+// 最小操作数使元素相等
+func minMoves(nums []int) (ans int) {
+	min := nums[0]
+	for _, num := range nums[1:] {
+		if num < min {
+			min = num
+		}
+	}
+	for _, num := range nums {
+		ans += num - min
+	}
+	return
+}
